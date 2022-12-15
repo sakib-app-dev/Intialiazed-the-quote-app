@@ -15,9 +15,8 @@ class UserController extends Controller
 
         if ($keyword) {
             $users = User::where('first_name', 'like', "%$keyword%")->orWhere('last_name', 'like', "%$keyword%")->orWhere('email', 'like', "%$keyword%")->get();
-            $cnt = User::where('first_name', 'like', "%$keyword%")->orWhere('last_name', 'like', "%$keyword%")->orWhere('email', 'like', "%$keyword%")->count();
-            $userList = [];
-            $total_pages = ($cnt + $pageSize - 1) / $pageSize;
+            $count = User::where('first_name', 'like', "%$keyword%")->orWhere('last_name', 'like', "%$keyword%")->orWhere('email', 'like', "%$keyword%")->count();
+            $total_pages = ($count + $pageSize - 1) / $pageSize;
 
             foreach ($users as $user) {
                 $userList[] = [
